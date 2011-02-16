@@ -10,8 +10,8 @@ DB_CREDS:
   DRIVER: postgres
 ABC:
   URL:  https://api.github.com/users/mralexgray/repos           # dummy url
-  USER: google_user
-  PASS: google_pass
+  USER: some_user
+  PASS: some_pass
 DEF:
   URL: https://api.chucknorris.io/jokes/random # dummy url
 PROXY:
