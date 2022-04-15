@@ -20,5 +20,7 @@ func loadConfig(path string) (*Settings, error) {
 	if err != nil {
 		log.Err(err).Msg("error at config")
 	}
+
+	log.Trace().Msgf("Configuration loaded: %v", CNT)
 	return CNT, err
 }

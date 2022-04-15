@@ -7,6 +7,7 @@ require (
 	github.com/go-playground/validator/v10 v10.10.1
 	github.com/gofiber/fiber/v2 v2.29.0
 	github.com/jmoiron/sqlx v1.3.4
+	github.com/lib/pq v1.10.0
 	github.com/pressly/goose v2.7.0+incompatible
 	github.com/rs/zerolog v1.26.1
 	github.com/spf13/viper v1.11.0
@@ -26,7 +27,7 @@ require (
 	github.com/klauspost/compress v1.15.0 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/magiconair/properties v1.8.6 // indirect
-	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
+	github.com/matttproud/golang_protobuf_extensions v1.0.2-0.20181231171920-c182affec369 // indirect
 	github.com/mitchellh/mapstructure v1.4.3 // indirect
 	github.com/pelletier/go-toml v1.9.4 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.0-beta.8 // indirect

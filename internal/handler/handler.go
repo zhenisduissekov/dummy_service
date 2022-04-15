@@ -32,8 +32,10 @@ type ErrorResponseToFront struct {
 	Status  string `json:"status" default:"error"`
 	Code    string `json:"code"`
 	Message string `json:"message"`
+	Error   string `json:"error"`
 }
 
+// register payment
 func (h *Handler) Register(f *fiber.Ctx) error {
 	var items ABCService.RequestRegisterItems
 
@@ -43,6 +45,7 @@ func (h *Handler) Register(f *fiber.Ctx) error {
 		return f.Status(fiber.StatusBadRequest).JSON(&ErrorResponseToFront{
 			Message: Msg1,
 			Code:    Code1,
+			Error:   err.Error(),
 		})
 	}
 
@@ -68,4 +71,9 @@ func (h *Handler) Register(f *fiber.Ctx) error {
 	return f.Status(fiber.StatusOK).JSON(&ResponseToFront{
 		Body: data,
 	})
+}
+
+// schedule payment
+func (h *Handler) Schedule(f *fiber.Ctx) error {
+	//TODO: needs completion
 }

@@ -21,7 +21,7 @@ func main() {
 	app := DI.App.Group("/api")
 	{
 		app.Post("/register", handler.Register)
-		//api.Post("/schedulePayment", DIHandler.SchedulePayment) //todo: don't forget
+		app.Post("/schedulePayment", handler.Schedule)
 	}
 
 	log.Info().Msgf("Listening on %s", *listenAddress)

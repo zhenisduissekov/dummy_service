@@ -1,18 +1,19 @@
 API_CREDS:
   USER: test_user
-  PASS: test_user
+  PASS: test_pass
 DB_CREDS:
   HOST: localhost
   DB: postgres
   PORT: 5432
   USER: postgres
-  PASS: somePassword
+  PASS: mysecretpassword
+  DRIVER: postgres
 ABC:
-  URL: https://www.google.com             # dummy url
+  URL:  https://api.github.com/users/mralexgray/repos           # dummy url
   USER: google_user
   PASS: google_pass
 DEF:
   URL: https://api.chucknorris.io/jokes/random # dummy url
 PROXY:
   Address: ""
-LOG_LEVEL: "WARN"
+LOG_LEVEL: -1 #debug

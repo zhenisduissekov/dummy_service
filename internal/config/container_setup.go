@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
@@ -14,14 +15,14 @@ import (
 )
 
 type APIAuth struct {
-	user string `mapstructure:"USER"`
-	pass string `mapstructure:"PASS"`
+	User string `mapstructure:"USER"`
+	Pass string `mapstructure:"PASS"`
 }
 
 type AuthItems struct {
 	Url  string `mapstructure:"URL"`
 	User string `mapstructure:"USER"`
-	Pass string `mapstructure:"ABC"`
+	Pass string `mapstructure:"PASS"`
 }
 
 type DBAuthItems struct {
@@ -41,7 +42,7 @@ type Settings struct {
 	DBAuth  db.DBAuthItems `mapstructure:"DB_CREDS"`
 	ABCAuth AuthItems      `mapstructure:"ABC"`
 	DEFAuth AuthItems      `mapstructure:"DEF"`
-	Lvl     zerolog.Level  `mapstructure:"LOG_LEVEL"`
+	LVL     zerolog.Level  `mapstructure:"LOG_LEVEL"`
 	Proxy   Proxy          `mapstructure:"PROXY"`
 }
 
@@ -54,11 +55,17 @@ type Container struct {
 }
 
 func New() *Container {
+	tools.PrepareLogging()
+
 	conf, err := loadConfig(".")
+
+	fmt.Println("cnfig", conf)
+
 	if err != nil {
 		log.Fatal().Err(err).Msg("could not load env")
 	}
-	tools.PrepareLogging(conf.Lvl)
+
+	zerolog.SetGlobalLevel(conf.LVL)
 
 	db := conf.NewConnection()
 

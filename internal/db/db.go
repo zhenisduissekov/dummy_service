@@ -3,12 +3,14 @@ package db
 import (
 	"fmt"
 	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 	"github.com/pressly/goose"
 	"github.com/rs/zerolog/log"
 )
 
 var (
-	dbConnString = "host=%s port=%s user=%s password=%s dbname=%s sslmode=disable"
+	dbConnString  = "host=%s port=%s user=%s password=%s dbname=%s sslmode=disable"
+	migrationsDir = "migrations"
 )
 
 type DBAuthItems struct {
@@ -24,15 +26,19 @@ func (db *DBAuthItems) Connect2DB() (*sqlx.DB, error) {
 	connStr := fmt.Sprintf(dbConnString, db.HostDB, db.PortDB, db.UsernameDB, db.PasswordDB, db.DB)
 	conn, err := sqlx.Connect(db.DriverName, connStr)
 	if err != nil {
-		log.Fatal().Err(err).Msg("error at sqlx.Open")
+		log.Fatal().Err(err).Msg("error at sqlx.Connect")
 		return nil, err
 	}
 	log.Trace().Msg("connected to DB")
 
-	if err := goose.Up(conn.DB, "migrations"); err != nil {
+	migrate(conn)
+
+	return conn, err
+}
+
+func migrate(conn *sqlx.DB) {
+	if err := goose.Up(conn.DB, migrationsDir); err != nil {
 		log.Fatal().Err(err).Msg("error at goose.Up")
 		panic(err)
 	}
-
-	return conn, err
 }

@@ -7,9 +7,8 @@ import (
 	"time"
 )
 
-func PrepareLogging(lvl zerolog.Level) {
+func PrepareLogging() {
 	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
-	zerolog.SetGlobalLevel(lvl)
 	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: time.RFC3339})
 	log.Logger = log.With().Caller().Logger()
 }

@@ -2,6 +2,7 @@ package service
 
 import (
 	"github.com/jmoiron/sqlx"
+	"github.com/rs/zerolog/log"
 	"github.com/zhenisduissekov/dummy_service/internal/abc/client"
 	"github.com/zhenisduissekov/dummy_service/internal/abc/repository"
 )
@@ -19,14 +20,31 @@ type RequestRegisterItems struct {
 	ExpirationDate string `json:"expirationDate"`
 }
 
-func New(db *sqlx.DB, addr, user, pass, proxy string) *Service {
+func New(db *sqlx.DB, url, user, pass, proxy string) *Service {
 	return &Service{
-		Client:     client.New(addr, user, pass, proxy),
+		Client:     client.New(url, user, pass, proxy),
 		Repository: repository.New(db),
 	}
 }
 
-func (s *Service) Register(items RequestRegisterItems) (string, error) {
-	//TODO: fill it up
-	return "ok", nil
+func (s *Service) Register(items RequestRegisterItems) (map[string]int, error) {
+	counter := 0
+	data, err := s.Client.SendRequest()
+	if err != nil {
+		log.Err(err).Msg("error at MakeRequest")
+		return map[string]int{}, err
+	}
+
+	for {
+		_, err := s.Repository.Save(items.Id, data[counter].NodeId)
+		if err != nil {
+			log.Err(err).Msg("error at Repository.Save")
+			return map[string]int{"received items": len(data), "saved item": counter}, err
+		}
+		counter += 1
+
+		if counter >= len(data) {
+			return map[string]int{"received items": len(data), "saved item": counter}, nil
+		}
+	}
 }
