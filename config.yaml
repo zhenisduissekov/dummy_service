@@ -1,0 +1,18 @@
+API_CREDS:
+  USER: test_user
+  PASS: test_user
+DB_CREDS:
+  HOST: localhost
+  DB: postgres
+  PORT: 5432
+  USER: postgres
+  PASS: somePassword
+ABC:
+  URL: https://www.google.com             # dummy url
+  USER: google_user
+  PASS: google_pass
+DEF:
+  URL: https://api.chucknorris.io/jokes/random # dummy url
+PROXY:
+  Address: ""
+LOG_LEVEL: "WARN"
