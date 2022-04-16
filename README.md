@@ -1,7 +1,6 @@
 # dummy_service
 
-This is a dummy service that is has two endpoints which simulate integration with two individual systems: ABC and DEF. When request is received this service processes it, prepares its own request to one of the systems and sends it. When response is received service combines data and saves it to DB(Postgre) and responses to a client with a simple counter.
-
+This is a dummy service with two endpoints that integrate with two individual systems: ABC and DEF. When a user sends a request, this service processes it, prepares and sends its own request to one of the systems. As soon as a response is received this service combines data, saves it to DB(Postgre) and responses to a client with a simple counter and a statusOk.
 
 ## methods
     1. http://localhost:1111/api/register

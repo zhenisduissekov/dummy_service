@@ -1,0 +1,19 @@
+swagger: "2.0"
+info:
+  title: dummy_service 1.0.0
+  description: standard service that takes a request, processes it, sends a request to other services and then combines received data saving it to a DB.
+  version: 1.0.0
+host: www
+schemes:
+  - https
+paths:
+  - endpoint 1
+  - /:
+    :
+      summary: summary
+      description: desc
+      responses:
+        '200':
+          description: Ok
+
+
