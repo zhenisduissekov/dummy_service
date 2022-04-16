@@ -76,4 +76,8 @@ func (h *Handler) Register(f *fiber.Ctx) error {
 // schedule payment
 func (h *Handler) Schedule(f *fiber.Ctx) error {
 	//TODO: needs completion
+
+	return f.Status(fiber.StatusOK).JSON(&ResponseToFront{
+		Body: "endpoint not finished",
+	})
 }
