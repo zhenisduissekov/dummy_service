@@ -1,0 +1,107 @@
+basePath: /
+definitions:
+  handler.ErrorResponseToFront:
+    properties:
+      code:
+        type: string
+      error:
+        type: string
+      message:
+        type: string
+      status:
+        default: error
+        type: string
+    type: object
+  handler.ResponseToFront:
+    properties:
+      redirectLink: {}
+    type: object
+  service.RequestRegisterItems:
+    properties:
+      billNumber:
+        type: string
+      expirationDate:
+        type: string
+      failUrl:
+        type: string
+      id:
+        type: string
+      returnUrl:
+        type: string
+    required:
+    - billNumber
+    - failUrl
+    - id
+    - returnUrl
+    type: object
+host: localhost:1111
+info:
+  contact: {}
+  description: A dummy service that takes a request, sends own request to another
+    service and then conducts response back to user.
+  termsOfService: http://swagger.io/terms/
+  title: Fiber Swagger Example API
+  version: "2.0"
+paths:
+  /api/register:
+    post:
+      consumes:
+      - application/json
+      description: register this request.
+      parameters:
+      - description: Register Body
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/service.RequestRegisterItems'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ResponseToFront'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponseToFront'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.ErrorResponseToFront'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponseToFront'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponseToFront'
+      security:
+      - BasicAuth: []
+      summary: Register endpoint
+      tags:
+      - register
+  /health:
+    get:
+      consumes:
+      - '*/*'
+      description: get the status of server.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Show the status of server.
+      tags:
+      - health
+schemes:
+- http
+securityDefinitions:
+  BasicAuth:
+    type: basic
+swagger: "2.0"

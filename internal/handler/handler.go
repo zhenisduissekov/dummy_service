@@ -35,10 +35,23 @@ type ErrorResponseToFront struct {
 	Error   string `json:"error"`
 }
 
-// register payment
+// Register
+// @Summary Register endpoint
+// @Security BasicAuth
+// @Description register this request.
+// @Tags register
+// @Accept application/json
+// @Produce json
+// @Success 200 {object} map[string]interface{}
+// @Param input body ABCService.RequestRegisterItems true "Register Body"
+// @Success 200 {object} ResponseToFront
+// @Failure 400 {object} ErrorResponseToFront
+// @Failure 401 {object} ErrorResponseToFront
+// @Failure 404 {object} ErrorResponseToFront
+// @Failure 500 {object} ErrorResponseToFront
+// @Router /api/register [post]
 func (h *Handler) Register(f *fiber.Ctx) error {
 	var items ABCService.RequestRegisterItems
-
 	err := f.BodyParser(&items)
 	if err != nil {
 		log.Err(err).Msg("error at Register")
@@ -73,20 +86,6 @@ func (h *Handler) Register(f *fiber.Ctx) error {
 	})
 }
 
-// schedule payment
-// @Summary Get comment by id
-// @Security BasicAuth
-// @Tags comment
-// @Description get comment by id
-// @ID getCommentById
-// @Accept  json
-// @Produce  json
-// @Param id path int true "comment ID"
-// @Success 200 {integer} integer 1
-// @Failure 400,404 {object} errorResponse
-// @Failure 500 {object} errorResponse
-// @Failure default {object} errorResponse
-// @Router /api/comments/{id} [get]
 func (h *Handler) Schedule(f *fiber.Ctx) error {
 	//TODO: needs completion
 

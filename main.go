@@ -16,9 +16,23 @@ func init() {
 	DI = config.New()
 }
 
+// @title Fiber Swagger Example API
+// @version 2.0
+// @description A dummy service that takes a request, sends own request to another service and then conducts response back to user.
+// @termsOfService http://swagger.io/terms/
+
+// @host localhost:1111
+// @BasePath /
+// @schemes http
+
+// @securityDefinitions.basic BasicAuth
+// @in header
+// @name Authorization
 func main() {
 	handler := handler.Handler{DI: DI}
+
 	app := DI.App.Group("/api")
+
 	{
 		app.Post("/register", handler.Register)
 		app.Post("/schedulePayment", handler.Schedule)
