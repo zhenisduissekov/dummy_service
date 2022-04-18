@@ -32,9 +32,72 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "register"
+                    "BusinessLogic"
                 ],
                 "summary": "Register endpoint",
+                "parameters": [
+                    {
+                        "description": "Register Body",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/service.RequestRegisterItems"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handler.ResponseToFront"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handler.ErrorResponseToFront"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/handler.ErrorResponseToFront"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/handler.ErrorResponseToFront"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handler.ErrorResponseToFront"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/schedule": {
+            "post": {
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "description": "schedule something with this request.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "BusinessLogic"
+                ],
+                "summary": "Schedule endpoint",
                 "parameters": [
                     {
                         "description": "Register Body",
@@ -171,7 +234,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/",
 	Schemes:          []string{"http"},
 	Title:            "Fiber Swagger Example API",
-	Description:      "A dummy service that takes a request, sends own request to another service and then conducts response back to user.",
+	Description:      "A dummy service that takes a request, sends own request to another service and then conducts response back to user. Sample creds (test_user/test_pass)",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }

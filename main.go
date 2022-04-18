@@ -18,7 +18,7 @@ func init() {
 
 // @title Fiber Swagger Example API
 // @version 2.0
-// @description A dummy service that takes a request, sends own request to another service and then conducts response back to user.
+// @description A dummy service that takes a request, sends own request to another service and then conducts response back to user. Sample creds (test_user/test_pass)
 // @termsOfService http://swagger.io/terms/
 
 // @host localhost:1111

@@ -41,8 +41,8 @@ func (c *Settings) NewApp() *fiber.App {
 
 // HealthCheck godoc
 // @Summary Show the status of server.
+// @Tags Technical
 // @Description get the status of server.
-// @Tags health
 // @Accept */*
 // @Produce json
 // @Success 200 {object} map[string]interface{}

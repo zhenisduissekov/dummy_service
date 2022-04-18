@@ -35,11 +35,10 @@ type ErrorResponseToFront struct {
 	Error   string `json:"error"`
 }
 
-// Register
 // @Summary Register endpoint
+// @Tags BusinessLogic
 // @Security BasicAuth
 // @Description register this request.
-// @Tags register
 // @Accept application/json
 // @Produce json
 // @Success 200 {object} map[string]interface{}
@@ -69,6 +68,7 @@ func (h *Handler) Register(f *fiber.Ctx) error {
 		return f.Status(fiber.StatusBadRequest).JSON(&ErrorResponseToFront{
 			Message: Msg2,
 			Code:    Code2,
+			Error:   err.Error(),
 		})
 	}
 
@@ -78,6 +78,7 @@ func (h *Handler) Register(f *fiber.Ctx) error {
 		return f.Status(fiber.StatusInternalServerError).JSON(&ErrorResponseToFront{
 			Message: Msg3,
 			Code:    Code3,
+			Error:   err.Error(),
 		})
 	}
 
@@ -86,6 +87,20 @@ func (h *Handler) Register(f *fiber.Ctx) error {
 	})
 }
 
+// @Summary Schedule endpoint
+// @Tags BusinessLogic
+// @Security BasicAuth
+// @Description schedule something with this request.
+// @Accept application/json
+// @Produce json
+// @Success 200 {object} map[string]interface{}
+// @Param input body ABCService.RequestRegisterItems true "Register Body"
+// @Success 200 {object} ResponseToFront
+// @Failure 400 {object} ErrorResponseToFront
+// @Failure 401 {object} ErrorResponseToFront
+// @Failure 404 {object} ErrorResponseToFront
+// @Failure 500 {object} ErrorResponseToFront
+// @Router /api/schedule [post]
 func (h *Handler) Schedule(f *fiber.Ctx) error {
 	//TODO: needs completion
 

@@ -38,7 +38,7 @@ host: localhost:1111
 info:
   contact: {}
   description: A dummy service that takes a request, sends own request to another
-    service and then conducts response back to user.
+    service and then conducts response back to user. Sample creds (test_user/test_pass)
   termsOfService: http://swagger.io/terms/
   title: Fiber Swagger Example API
   version: "2.0"
@@ -82,7 +82,47 @@ paths:
       - BasicAuth: []
       summary: Register endpoint
       tags:
-      - register
+      - BusinessLogic
+  /api/schedule:
+    post:
+      consumes:
+      - application/json
+      description: schedule something with this request.
+      parameters:
+      - description: Register Body
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/service.RequestRegisterItems'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ResponseToFront'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponseToFront'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.ErrorResponseToFront'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponseToFront'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponseToFront'
+      security:
+      - BasicAuth: []
+      summary: Schedule endpoint
+      tags:
+      - BusinessLogic
   /health:
     get:
       consumes:
