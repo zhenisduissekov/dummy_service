@@ -13,10 +13,10 @@ type Service struct {
 }
 
 type RequestRegisterItems struct {
-	Id             string `json:"id" validate:"required" db:"id"`
-	ReturnUrl      string `json:"returnUrl" validate:"required" db:"returnUrl"`
-	FailUrl        string `json:"failUrl" validate:"required" db:"failUrl"`
-	BillNumber     string `json:"billNumber" validate:"required" db:"billNumber"`
+	Id             string `json:"id" validate:"required" db:"id" example:"2022-01-01""`
+	ReturnUrl      string `json:"returnUrl" validate:"required" db:"returnUrl"  example:"web.com/success"`
+	FailUrl        string `json:"failUrl" validate:"required" db:"failUrl" example:"web.com/fail"`
+	BillNumber     string `json:"billNumber" validate:"required" db:"billNumber" example:"12345678"`
 	ExpirationDate string `json:"expirationDate"`
 }
 

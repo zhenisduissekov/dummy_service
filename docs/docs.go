@@ -153,7 +153,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "health"
+                    "Technical"
                 ],
                 "summary": "Show the status of server.",
                 "responses": {
@@ -203,19 +203,23 @@ const docTemplate = `{
             ],
             "properties": {
                 "billNumber": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "12345678"
                 },
                 "expirationDate": {
                     "type": "string"
                 },
                 "failUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "web.com/fail"
                 },
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "2022-01-01"
                 },
                 "returnUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "web.com/success"
                 }
             }
         }

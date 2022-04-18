@@ -19,14 +19,18 @@ definitions:
   service.RequestRegisterItems:
     properties:
       billNumber:
+        example: "12345678"
         type: string
       expirationDate:
         type: string
       failUrl:
+        example: web.com/fail
         type: string
       id:
+        example: "2022-01-01"
         type: string
       returnUrl:
+        example: web.com/success
         type: string
     required:
     - billNumber
@@ -138,7 +142,7 @@ paths:
             type: object
       summary: Show the status of server.
       tags:
-      - health
+      - Technical
 schemes:
 - http
 securityDefinitions:
